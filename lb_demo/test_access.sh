@@ -12,5 +12,4 @@ fi
 acc_times=$2
 acc_interval=$4
 
-echo "for ((i=0;i<$acc_times;i++));do curl -X GET http://127.0.0.1:8080/; sleep $acc_interval; done"
 for ((i=0;i<$acc_times;i++));do curl -X GET http://127.0.0.1:8080/; sleep $acc_interval; done
