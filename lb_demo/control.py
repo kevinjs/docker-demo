@@ -72,6 +72,7 @@ if __name__=='__main__':
             refresh_haproxy(cli)
         elif 'help' == sys.argv[1]:
             print 'ADD: python %s add num\nSTART: python %s %s\nSTOP: python %s %s' %(sys.argv[0], sys.argv[0], 'con_id_str', sys.argv[0], 'con_id_str')
+            sys.exit(0)
         elif 'list' == sys.argv[1]:
             list_nodes(cli)
     elif len(sys.argv) == 3:
