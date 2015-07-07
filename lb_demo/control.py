@@ -3,6 +3,7 @@
 # email: dysj4099@gmail.com
 
 import sys
+import time
 import subprocess
 from docker import Client
 
@@ -45,6 +46,7 @@ def list_nodes(cli):
         print '%s	%s	%s' %(i, con_status, con_image)
 
 def refresh_haproxy(cli):
+    time.sleep(1)
     new_content = ''
     cons_info = {}
 
@@ -54,7 +56,7 @@ def refresh_haproxy(cli):
         con_ip = cli.inspect_container(i)['NetworkSettings']['IPAddress']
         cons_info[i] = con_ip
 
-    with open('/etc/haproxy/haproxy.cfg') as f_ha:
+    with open('haproxy.cfg') as f_ha:
         for line in f_ha.xreadlines():
             if not line.strip().startswith('server'):
                 new_content += line
