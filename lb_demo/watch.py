@@ -93,12 +93,19 @@ def main(cli):
 
             if len(tmp) == 2:
                 acc_num = tmp[1].strip()
+                acc_num_v = 0
+                try:
+                    acc_num_v = int(acc_num)
+                except ValueError:
+                    acc_num = 'err'
+                    acc_num_v = 0
                 if tik == 0:
-                    cnt_old[i] = int(acc_num)
+                    cnt_old[i] = acc_num_v
                 elif tik == 3:
-                    cnt_new[i] = int(acc_num)
+                    cnt_new[i] = acc_num_v
             else:
                 acc_num = 'err'
+
             if tik == 3:
                 if i in cnt_new and i in cnt_old:
                     acc_rate = (cnt_new[i] - cnt_old[i])/3.0
