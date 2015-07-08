@@ -83,15 +83,21 @@ def auto_adjust(cli, cur_rate):
         # normal state
         if min_rate <= cur_rate and cur_rate <= max_rate:
             repeat['normal'] += 1
+
+            if repeat['abnormal'] <= 4:
+                repeat['abnormal'] = 0
         else:
             repeat['abnormal'] += 1
+            
+            if repeat['abnormal'] >= 4:
+                repeat['normal'] = 0
 
         #print repeat
 
         if repeat['normal'] > 3:
             #repeat['abnormal'] = 0
-            if cur_rate == 0:
-                repeat['normal'] = 0
+            #if cur_rate == 0:
+            #    repeat['normal'] = 0
             return 'normal'
         if repeat['abnormal'] > 3:
             #repeat['normal'] = 0
@@ -149,7 +155,7 @@ def main(cli):
 
             if tik == 3:
                 if i in cnt_new and i in cnt_old:
-                    acc_rate = (cnt_new[i] - cnt_old[i])/3.0
+                    acc_rate = round((cnt_new[i] - cnt_old[i])/3.0, 4)
                 else:
                     acc_rate = 0
                 if acc_rate < 0:
@@ -166,12 +172,17 @@ def main(cli):
 
         rate_avg = 0.0
         length_cons = 1
+        sum_rate_cons = 0
+
         if rate:
             if cons:
                 length_cons = len(cons)
-            rate_avg = float(sum(rate.values()))/length_cons
+            for c_i in cons:
+                if c_i in rate:
+                    sum_rate_cons += rate[c_i]
+            rate_avg = round(float(sum_rate_cons)/length_cons, 4)
             if is_rp:
-                report['total'][cnt_total] = sum(rate.values())
+                report['total'][cnt_total] = sum_rate_cons
         else:
             if is_rp:
                 report['total'][cnt_total] = 0
