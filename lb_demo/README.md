@@ -2,9 +2,9 @@
 
 <img src="demo1.png" height="400" border="1"/>
 
-1. 安装Docker1.7，安装过程请参考[https://docs.docker.com/installation/](https://docs.docker.com/installation/)
+1.安装Docker1.7，安装过程请参考[https://docs.docker.com/installation/](https://docs.docker.com/installation/)
 
-2. 下载实验镜像
+2.下载实验镜像
 
 通过以下docker命令下载镜像：
 
@@ -12,7 +12,7 @@
 
 该镜像在ubuntu14.04官方镜像的基础上安装了python2.7以及tornado，并且使用tornado搭建了一个简单的http服务器，功能是返回主机名以及当前系统时间，并且会统计累计访问次数。
 
-3. 开启负载均衡服务
+3.开启负载均衡服务
 
 负载均衡服务一共有三种模式，normal、auto以及report，介绍如下：
 
@@ -25,13 +25,13 @@
 	python watch.py report 0.5-2.0
 	# 与auto模式相同，不过在CTRL-C停止watch.py后会生成访问量变化的csv数据记录
 	
-4. 模拟实际访问请求
+4.模拟实际访问请求
 
 通过脚本 test_access.sh 模拟访问请求，-t设置总共请求次数，-i设置请求间隔时间，通过调节这两个参数可以实现不同频度和持续时间的访问请求流。可以运行多个进行轰炸 :P，当请求模拟生成后，就可以通过watch.py脚本的输出观察每个docker实例的运行状况以及负载状况。
 
 	./test_access.sh -t 1000 -i 0.05
 	
-5. 手动控制
+5.手动控制
 
 可以通过control.py工具列出当前机器可用docker实例列表，以及对特定实例进行启、停操作。
 
